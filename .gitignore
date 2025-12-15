@@ -42,3 +42,5 @@
 
 cmake-build-debug
 .idea
+
+target/
