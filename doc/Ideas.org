@@ -1,0 +1,31 @@
+* Commands
+
+kmetaserver --config <configfile|/etc/kodiakfs/kodiakfs.conf> 
+
+
+kodiak --metaserver <ip addr>
+
+kodiak status
+kodiak clients
+
+kodiak chunkhost list
+kodiak chunkhost details <hostid>
+
+kodiak storage
+kodiak storage down
+kodiak storage up
+
+kodiak df
+kodiak df details
+
+kodiak mount <filesystem name> <mount point>
+
+* Data Structures
+
+#+NAME: Block data structure
+#+BEGIN_SRC C++
+struct Block {
+
+}
+#+END_SRC
+
