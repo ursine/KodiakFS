@@ -18,27 +18,41 @@ kodiak storage up
 kodiak df
 kodiak df details
 
+kodiak fs create <filesystem name>
+kodiak fs list
+kodiak fs status <filesystem name>
+kodiak fs delete <filesystem name>
+
 kodiak mount <filesystem name> <mount point>
 
 * Data Structures
 
 #+NAME: Block data structures
 #+BEGIN_SRC C++
-  struct DataBlock {
-      size     uint32_t;       // Size of data - 32
+  struct DataChunk {
       checksum uint8_t[32];    // SHA256 checksum of data
+      chunkid  uint64_t;
+      size     uint32_t;       // Size of data block      
       data     uint8_t[0];     // Variable length data block
   };
 
   struct BlockLocation {
-    chunkhost uint32_t;        // each chunkhost has a numeric id and this maps the block to it
-    chunknum  uint64_t;        // what chunk is this monotonically increasing
+
+
   };
 
   struct BlockIndex {
     blocks uint64_t;
   };
 
-    
+  struct ChunkHostStatistics {
+    disk_space uint64_t;     // How many bytes remain on the chunk host
+  };
+
+  enum ServerCommands {
+     REGISTER_CHUNK_HOST
+
+  };
+
 #+END_SRC
 
