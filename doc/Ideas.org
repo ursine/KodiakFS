@@ -22,10 +22,23 @@ kodiak mount <filesystem name> <mount point>
 
 * Data Structures
 
-#+NAME: Block data structure
+#+NAME: Block data structures
 #+BEGIN_SRC C++
-struct Block {
+  struct DataBlock {
+      size     uint32_t;       // Size of data - 32
+      checksum uint8_t[32];    // SHA256 checksum of data
+      data     uint8_t[0];     // Variable length data block
+  };
 
-}
+  struct BlockLocation {
+    chunkhost uint32_t;        // each chunkhost has a numeric id and this maps the block to it
+    chunknum  uint64_t;        // what chunk is this monotonically increasing
+  };
+
+  struct BlockIndex {
+    blocks uint64_t;
+  };
+
+    
 #+END_SRC
 
