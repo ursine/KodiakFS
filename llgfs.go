@@ -8,6 +8,7 @@ import (
 
 	"log/slog"
 
+	"github.com/ursine/KodiakFS/cmd"
 	"github.com/ursine/KodiakFS/src/gfs/chunkserver"
 	"github.com/ursine/KodiakFS/src/gfs/master"
 
@@ -58,6 +59,8 @@ func main() {
 
 	h := slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{Level: programLevel})
 	slog.SetDefault(slog.New(h))
+
+	cmd.Execute()
 
 	if len(os.Args) < 2 {
 		printUsage()
