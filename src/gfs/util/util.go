@@ -5,7 +5,7 @@ import (
 	"math/rand"
 	"net/rpc"
 
-	"gfs"
+	"github.com/ursine/KodiakFS/src/gfs"
 )
 
 // Call is RPC call helper

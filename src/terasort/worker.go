@@ -2,7 +2,7 @@ package terasort
 
 import (
 	"fmt"
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 
     "sort"
     "io"

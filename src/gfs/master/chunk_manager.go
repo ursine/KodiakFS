@@ -6,9 +6,9 @@ import (
 	"sync"
 	"time"
 
-	"gfs"
-	"gfs/util"
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
+	"github.com/ursine/KodiakFS/src/gfs"
+	"github.com/ursine/KodiakFS/src/gfs/util"
 )
 
 // chunkManager manges chunks

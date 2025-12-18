@@ -1,18 +1,22 @@
 package main
 
 import (
+	"context"
 	"fmt"
-	log "github.com/Sirupsen/logrus"
-	//"math/rand"
-	//"time"
+	"os/signal"
+	"syscall"
 
-	"gfs"
-	"gfs/chunkserver"
-	"gfs/master"
+	"log/slog"
+
+	"github.com/ursine/KodiakFS/src/gfs/chunkserver"
+	"github.com/ursine/KodiakFS/src/gfs/master"
+
 	"os"
+
+	"github.com/ursine/KodiakFS/src/gfs"
 )
 
-func runMaster() {
+func runMaster(_ context.Context) {
 	if len(os.Args) < 4 {
 		printUsage()
 		return
@@ -24,7 +28,7 @@ func runMaster() {
 	<-ch
 }
 
-func runChunkServer() {
+func runChunkServer(_ context.Context) {
 	if len(os.Args) < 5 {
 		printUsage()
 		return
@@ -46,16 +50,25 @@ func printUsage() {
 }
 
 func main() {
-	log.SetLevel(log.DebugLevel)
+	// Create a context that cancels when an interrupt or SIGTERM is received.
+	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
+	defer cancel()
+
+	programLevel := new(slog.LevelVar)
+
+	h := slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{Level: programLevel})
+	slog.SetDefault(slog.New(h))
+
 	if len(os.Args) < 2 {
 		printUsage()
 		return
 	}
+
 	switch os.Args[1] {
 	case "master":
-		runMaster()
+		runMaster(ctx)
 	case "chunkserver":
-		runChunkServer()
+		runChunkServer(ctx)
 	default:
 		printUsage()
 	}

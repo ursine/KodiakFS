@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"gfs"
+	"github.com/ursine/KodiakFS/src/gfs"
 )
 
 type downloadItem struct {

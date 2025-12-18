@@ -2,7 +2,11 @@ package chunkserver
 
 import (
 	"fmt"
-	log "github.com/Sirupsen/logrus"
+
+	log "github.com/sirupsen/logrus"
+	"github.com/ursine/KodiakFS/src/gfs"
+	"github.com/ursine/KodiakFS/src/gfs/util"
+
 	//"math/rand"
 	"encoding/gob"
 	"io"
@@ -13,9 +17,6 @@ import (
 	"sync"
 	"time"
 	//"strings"
-
-	"gfs"
-	"gfs/util"
 )
 
 // ChunkServer struct
@@ -57,13 +58,13 @@ const (
 // NewAndServe starts a chunkserver and return the pointer to it.
 func NewAndServe(addr, masterAddr gfs.ServerAddress, rootDir string) *ChunkServer {
 	cs := &ChunkServer{
-		address:  addr,
-		shutdown: make(chan struct{}),
-		master:   masterAddr,
-		rootDir:  rootDir,
-		dl:       newDownloadBuffer(gfs.DownloadBufferExpire, gfs.DownloadBufferTick),
+		address:                addr,
+		shutdown:               make(chan struct{}),
+		master:                 masterAddr,
+		rootDir:                rootDir,
+		dl:                     newDownloadBuffer(gfs.DownloadBufferExpire, gfs.DownloadBufferTick),
 		pendingLeaseExtensions: new(util.ArraySet),
-		chunk: make(map[gfs.ChunkHandle]*chunkInfo),
+		chunk:                  make(map[gfs.ChunkHandle]*chunkInfo),
 	}
 	rpcs := rpc.NewServer()
 	rpcs.Register(cs)
@@ -261,7 +262,7 @@ func (cs *ChunkServer) storeMeta() error {
 }
 
 // Shutdown shuts the chunkserver down
-//func (cs *ChunkServer) Shutdown(args gfs.Nouse, reply *gfs.Nouse) error {
+// func (cs *ChunkServer) Shutdown(args gfs.Nouse, reply *gfs.Nouse) error {
 func (cs *ChunkServer) Shutdown() {
 	if !cs.dead {
 		log.Warning(cs.address, " Shutdown")

@@ -3,15 +3,16 @@ package master
 import (
 	"encoding/gob"
 	"fmt"
-	log "github.com/sirupsen/logrus"
+	"log/slog"
 	"net"
 	"net/rpc"
 	"os"
 	"path"
 	"time"
 
-	"gfs"
-	"gfs/util"
+	log "github.com/sirupsen/logrus"
+	"github.com/ursine/KodiakFS/src/gfs"
+	"github.com/ursine/KodiakFS/src/gfs/util"
 )
 
 // Master Server struct
@@ -20,7 +21,7 @@ type Master struct {
 	serverRoot string
 	l          net.Listener
 	shutdown   chan struct{}
-	dead       bool // set to ture if server is shuntdown
+	dead       bool // set to true if server is shutdown
 
 	nm  *namespaceManager
 	cm  *chunkManager
@@ -44,7 +45,7 @@ func NewAndServe(address gfs.ServerAddress, serverRoot string) *Master {
 	rpcs.Register(m)
 	l, e := net.Listen("tcp", string(m.address))
 	if e != nil {
-		log.Fatal("listen error:", e)
+		slog.Error("listen error:", "error", e)
 	}
 	m.l = l
 
