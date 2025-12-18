@@ -67,7 +67,7 @@ func NewAndServe(address gfs.ServerAddress, serverRoot string) *Master {
 				}()
 			} else {
 				if !m.dead {
-					log.Fatal("master accept error:", err)
+					slog.Error("master accept error:", "error", err)
 				}
 			}
 		}
