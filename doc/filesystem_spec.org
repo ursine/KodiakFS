@@ -1,0 +1,6 @@
+inodes need to be numbered
+
+inode stores all the metadata pertaining to a file
+
+
+

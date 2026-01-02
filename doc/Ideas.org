@@ -2,16 +2,16 @@
 
 kmetaserver --config <configfile|/etc/kodiakfs/kodiakfs.conf> 
 
-
 kodiak --metaserver <ip addr>
 
 kodiak status
 kodiak clients
 
 kodiak chunkhost list
-kodiak chunkhost details <hostid>
+kodiak chunkhost add <ip:port> [nickname]
+kodiak chunkhost details <hostid|nickname>
 
-kodiak storage
+kodiak storage list
 kodiak storage down
 kodiak storage up
 
@@ -55,4 +55,26 @@ kodiak mount <filesystem name> <mount point>
   };
 
 #+END_SRC
+
+
+What are chunks like?
+How big are the block sizes used in the chunkserver?
+Can files have adjusted chunk sizes?
+
+
+
+
+Things should probably be similar to LVM.
+
+Physical Storage   -- handled by the chunk servers
+Volume Group       -- virtualized chunk types
+Logical Volume     -- NBD
+Logical Filesystem -- networked filesystem
+
+
+
+
+
+
+
 

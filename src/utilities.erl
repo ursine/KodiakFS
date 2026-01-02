@@ -4,6 +4,6 @@
 
 timestamp() ->
     {Megasec, Sec, Millis} = erlang:timestamp(),
-    Megasec*1000000 + Sec + Millis/1000.0.
+    Megasec * 1000000000 + Sec * 1000 + Millis.
 
 
