@@ -1,0 +1,10 @@
+{application, kodiakfs,
+ [{description, "A file system server poc"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {applications,
+   [kernel,
+    stdlib
+   ]},
+  {env, []}
+ ]}.
