@@ -60,6 +60,9 @@ kodiak mount <filesystem name> <mount point>
 What are chunks like?
 How big are the block sizes used in the chunkserver?
 Can files have adjusted chunk sizes?
+Chunkserver should store blocks in some integer multiple of the FS blocks minus a little for overhead.
+
+What is a "first pass" -- control cli can connect to clustered servers and report back statistics on the bunch of them
 
 
 
@@ -70,6 +73,13 @@ Physical Storage   -- handled by the chunk servers
 Volume Group       -- virtualized chunk types
 Logical Volume     -- NBD
 Logical Filesystem -- networked filesystem
+
+
+
+fuse client -
+control cli -   metaserver cluster   -  blockservers
+
+
 
 
 
