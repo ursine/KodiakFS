@@ -130,16 +130,12 @@ if(Erlang_FOUND)
     set_property(TARGET erlang_ei PROPERTY
       IMPORTED_LOCATION ${Erlang_EI_LIBRARY_PATH}/libei.a
       )
-    add_library(erlang_erl_interface STATIC IMPORTED)
-    set_property(TARGET erlang_erl_interface PROPERTY
-      IMPORTED_LOCATION ${Erlang_EI_LIBRARY_PATH}/libei.a
-      )
     add_library(Erlang::EI INTERFACE IMPORTED)
     set_property(TARGET Erlang::EI PROPERTY
       INTERFACE_INCLUDE_DIRECTORIES ${Erlang_EI_INCLUDE_DIRS}
       )
     set_property(TARGET Erlang::EI PROPERTY
-      INTERFACE_LINK_LIBRARIES erlang_ei erlang_erl_interface
+      INTERFACE_LINK_LIBRARIES erlang_ei
       )
   endif()
 endif(Erlang_FOUND)
